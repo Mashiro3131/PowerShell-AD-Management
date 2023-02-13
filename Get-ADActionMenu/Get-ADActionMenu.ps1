@@ -1,15 +1,15 @@
 $MyMenu = $true
-while ($MyMenu){
+while ($MyMenu) {
     write-host "----------------------What do you want to do?---------------------"
     write-host "#                        1: Search User Data                     #"
     write-host "#               2: Search Multiple Users Data From CSV           #"
     write-host "#                              x: exit                           #"
     write-host "------------------------------------------------------------------"
     $MenuChoice = Read-Host "Choose an option:"
-    switch ($MenuChoice){
+    switch ($MenuChoice) {
         # Search for a user's data in AD
         # This will output the username, First Name, Last Name, User Name, Email, and Phone Number
-        1{ 
+        1 { 
           
             # Get the user's ID
             $UserId = Read-Host "Enter the user's ID (example VDL07164): "
@@ -30,7 +30,7 @@ while ($MyMenu){
         }
 
         # Loops through a CSV file to find the users in the active directory then outputs the data to a new CSV file
-        2{
+        2 {
             # Open's the file explorer to select the CSV file
             $openFile = New-Object System.Windows.Forms.OpenFileDialog
             $openFile.Filter = "CSV Files (*.csv)|*.csv"
@@ -70,7 +70,11 @@ $FinalUsers | Export-Csv -Path $saveFile.FileName -Encoding UTF8 -Delimiter ";" 
 Write-Host "The results have been exported to $saveFile.FileName" -ForegroundColor Green
 
         }
+
         'x'{$MyMenu = $false}
-        default {Write-Host "Invalid choice"-ForegroundColor Red}
+        default {
+            Write-Host "Invalid choice"-ForegroundColor Red
+        }
+
     }
 }
