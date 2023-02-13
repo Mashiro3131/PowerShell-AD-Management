@@ -30,31 +30,32 @@ while ($MyMenu){
         }
 
         # Loops through a CSV file to find the users in the active directory then outputs the data to a new CSV file
-        2{ 
-        
-# Open's the file explorer to select the CSV file
-$openFile = New-Object System.Windows.Forms.OpenFileDialog
-$openFile.Filter = "CSV Files (*.csv)|*.csv"
-$openFile.Title = "Select the CSV file"
-$openFile.ShowDialog()
-$csv = $openFile.FileName
-$csvImport = import-csv -Path $csv -UseCulture
-$UserIds = $csvImport.Username
+        2{
+            # Open's the file explorer to select the CSV file
+            $openFile = New-Object System.Windows.Forms.OpenFileDialog
+            $openFile.Filter = "CSV Files (*.csv)|*.csv"
+            $openFile.Title = "Select the CSV file"
+            $openFile.ShowDialog()
+            $csv = $openFile.FileName
+            $csvImport = import-csv -Path $csv -UseCulture
+            $UserIds = $csvImport.Username
 
-# Loops through the CSV file to find the users in the active directory
-$FinalUsers = foreach ($UserId in $UserIds){
-Get-ADUser `
-    -Identity $UserId `
-    -Properties * | Select-Object Name, #VDL07164
-                                  displayname, #Mashiro3131
-                                  UserPrincipalName, #mashiro3131@gmail.com
-                                  telephoneNumber, # +xx (0) xx xx xx xx
-                                  Department, # IT
-                                  StreetAddress, # Somwhere In The World 66
-                                  extensionAttribute1, # Environment and Infrastructure
-                                  extensionAttribute2, # Organization and IT
-                                  extensionAttribute3, # Developpement
-                                  extensionAttribute9  # 15th floor
+            # Loops through the CSV file to find the users in the active directory
+            $FinalUsers = foreach ($UserId in $UserIds){
+                
+                Get-ADUser `
+                            -Identity $UserId `
+                            -Properties * | Select-Object Name, #VDL07164
+                                                        displayname, #Mashiro3131
+                                                        UserPrincipalName, #mashiro3131@gmail.com
+                                                        telephoneNumber, # +xx (0) xx xx xx xx
+                                                        Department, # IT
+                                                        StreetAddress, # Somwhere In The World 66
+                                                        extensionAttribute1, # Environment and Infrastructure
+                                                        extensionAttribute2, # Organization and IT
+                                                        extensionAttribute3, # Developpement
+                                                        extensionAttribute9  # 15th floor
+  
 } 
 
 # Open's the file explorer to choose how to name and where to save the CSV file
