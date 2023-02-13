@@ -62,7 +62,7 @@ while ($MyMenu) {
 $saveFile = New-Object System.Windows.Forms.SaveFileDialog
 $saveFile.Filter = "CSV Files (*.csv)|*.csv"
 $saveFile.Title = "Save the CSV file"
-$fileName = Read-Host "Enter the name of the file: "
+$fileName = Read-Host "How do you want to call the file "
 $saveFile.FileName = $fileName
 $saveFile.ShowDialog()
 $saveFile.FileName
