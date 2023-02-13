@@ -45,7 +45,7 @@ while ($MyMenu) {
                 
                 Get-ADUser `
                             -Identity $UserId `
-                            -Properties * | Select-Object Name, #VDL07164
+                            -Properties * | Select-Object Name, #MSHIRO3131
                                                         displayname, #Mashiro3131
                                                         UserPrincipalName, #mashiro3131@gmail.com
                                                         telephoneNumber, # +xx (0) xx xx xx xx
