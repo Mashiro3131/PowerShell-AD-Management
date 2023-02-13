@@ -1,8 +1,8 @@
 $MyMenu = $true
 while ($MyMenu) {
-    write-host "----------------------What do you want to do?---------------------"
+    write-host "--------------------What would you like to do ?-------------------"
     write-host "#                        1: Search User Data                     #"
-    write-host "#               2: Search Multiple Users Data From CSV           #"
+    write-host "#               2: Search for Multiple Users from CSV            #"
     write-host "#                              x: exit                           #"
     write-host "------------------------------------------------------------------"
     $MenuChoice = Read-Host "Choose an option:"
