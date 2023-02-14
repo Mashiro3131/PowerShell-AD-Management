@@ -24,6 +24,9 @@ while ($MyMenu) {
                                           extensionAttribute3, # Developpement
                                           StreetAddress, # Somwhere In The World 66
                                           extensionAttribute9  # 15th floor
+
+            # You can add more attributes by typing the following command : Get-ADUser -Properties * TheUserYouWantToSearch
+            # The attributes will be displayed on the left (someattribute : somevalue)
         }
 
         # Loops through a CSV file to find the users in the active directory then outputs the data to a new CSV file
@@ -37,8 +40,24 @@ while ($MyMenu) {
             $csvImport = import-csv -Path $csv -UseCulture
             $UserIds = $csvImport.Username
 
-            # Loops through the CSV file to find the users in the active directory
+            # Initializes the loading bar
+            $i = 0
+            $total = $UserIds.Count
+            Write-Progress -Activity "Searching for users" -Status "Please wait..." -PercentComplete 0
+
+
+
+            # Loops through the CSV file to find the users
             $FinalUsers = foreach ($UserId in $UserIds){
+
+
+            # Updates the loading bar
+            $i++
+            $percent = [math]::Round(($i / $total) * 100, 0)
+            Write-Progress -Activity "Searching for users" -Status "Please wait..." -PercentComplete $percent
+
+
+                # Outputs the data to a new CSV file
                 Get-ADUser `
                 -Identity $UserId `
                 -Properties * | Select-Object Name, #MSHIRO3131
@@ -50,6 +69,20 @@ while ($MyMenu) {
                                               extensionAttribute3, # Developpement
                                               StreetAddress, # Somwhere In The World 66
                                               extensionAttribute9  # 15th floor
+
+<#
+
+To change a header name change these lines : @{Name="TheHeaderYouWant";Expression={$_.TheProperty}}}
+
+                Get-ADUser `
+                -Identity $UserId `
+                -Properties * | Select-Object @{Name="Username";Expression={$_.SamAccountName}}, # The header will be Username and the value will be MSHIRO3131
+                                              @{Name="First Name";Expression={$_.GivenName}},
+                                              @{Name="Last Name";Expression={$_.Surname}},
+                                              @{Name="Email";Expression={$_.UserPrincipalName}},
+                                              @{Name="Direction";Expression={$_.extensionAttribute1}},
+                                              @{Name="Services";Expression={$_.Department}}
+#>
 } 
 
 # Open's the file explorer to choose how to name and where to save the CSV file
