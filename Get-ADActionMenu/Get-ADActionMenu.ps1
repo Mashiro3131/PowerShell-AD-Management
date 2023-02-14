@@ -11,22 +11,19 @@ while ($MyMenu) {
         # This will output the username, First Name, Last Name, User Name, Email, and Phone Number
         1 { 
           
-            # Get the user's ID
-            $UserId = Read-Host "Enter the user's ID (example VDL07164): "
-
-            # Get the user's data from the Active Directory
-            Get-ADUser -Identity $UserId  
-                       -Properties * | Select-Object Name, #VDL07164
-                                                     displayname, #Mashiro3131
-                                                     UserPrincipalName, #mashiro3131@gmail.com
-                                                     telephoneNumber, # +xx (0) xx xx xx xx
-                                                     Department, # IT
-                                                     StreetAddress, # Somwhere In The World 66
-                                                     extensionAttribute1, # Environment and Infrastructure
-                                                     extensionAttribute2, # Organization and IT
-                                                     extensionAttribute3, # Developpement
-                                                     extensionAttribute9  # 15th floor
-        
+            # Asks for the user's ID
+            $UserId = Read-Host "Enter the user's ID (ex: VDL07164) "
+            Get-ADUser `
+            -Identity $UserId `
+            -Properties * | Select-Object Name, #MSHIRO3131
+                                          displayname, # Nico Mengisen
+                                          UserPrincipalName, #mashiro3131@gmail.com
+                                          telephoneNumber, # +xx (0) xx xx xx xx
+                                          Department, # Organization and IT
+                                          extensionAttribute1, # Environment and Infrastructure
+                                          extensionAttribute3, # Developpement
+                                          StreetAddress, # Somwhere In The World 66
+                                          extensionAttribute9  # 15th floor
         }
 
         # Loops through a CSV file to find the users in the active directory then outputs the data to a new CSV file
@@ -42,20 +39,17 @@ while ($MyMenu) {
 
             # Loops through the CSV file to find the users in the active directory
             $FinalUsers = foreach ($UserId in $UserIds){
-                
                 Get-ADUser `
-                            -Identity $UserId `
-                            -Properties * | Select-Object Name, #MSHIRO3131
-                                                        displayname, #Mashiro3131
-                                                        UserPrincipalName, #mashiro3131@gmail.com
-                                                        telephoneNumber, # +xx (0) xx xx xx xx
-                                                        Department, # IT
-                                                        StreetAddress, # Somwhere In The World 66
-                                                        extensionAttribute1, # Environment and Infrastructure
-                                                        extensionAttribute2, # Organization and IT
-                                                        extensionAttribute3, # Developpement
-                                                        extensionAttribute9  # 15th floor
-  
+                -Identity $UserId `
+                -Properties * | Select-Object Name, #MSHIRO3131
+                                              displayname, # Nico Mengisen
+                                              UserPrincipalName, #mashiro3131@gmail.com
+                                              telephoneNumber, # +xx (0) xx xx xx xx
+                                              Department, # Organization and IT
+                                              extensionAttribute1, # Environment and Infrastructure
+                                              extensionAttribute3, # Developpement
+                                              StreetAddress, # Somwhere In The World 66
+                                              extensionAttribute9  # 15th floor
 } 
 
 # Open's the file explorer to choose how to name and where to save the CSV file
