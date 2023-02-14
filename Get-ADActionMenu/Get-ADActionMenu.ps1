@@ -82,6 +82,7 @@ To change a header name change these lines : @{Name="TheHeaderYouWant";Expressio
                                               @{Name="Email";Expression={$_.UserPrincipalName}},
                                               @{Name="Direction";Expression={$_.extensionAttribute1}},
                                               @{Name="Services";Expression={$_.Department}}
+                                              
 #>
 } 
 
